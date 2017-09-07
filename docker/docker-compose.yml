@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+### scrapyd #####
+  scrapyd:
+    build:
+      context: ./scrapyd
+      dockerfile: ${ScrapydDockerfileName}
+    ports:
+      - "6800:6800"
+    volumes:
+      - ./scrapyd_data:/var/lib/scrapyd
+      - ../:/var/code
+    # depends_on:
+    #   - splash
+    # links:
+    #   - splash
+    restart: always
+
+  splash:
+    image: scrapinghub/splash
+    ports:
+      - "8050:8050"
+      
